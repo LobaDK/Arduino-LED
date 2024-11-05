@@ -1,8 +1,8 @@
 #include <Arduino.h>
 
-#define LED 6
-#define BTN 2
-#define POTENTIOMETER A0
+const int LED = 6;
+const int BTN = 2;
+const uint8_t POTENTIOMETER = A0;
 
 void setup() {
   // put your setup code here, to run once:
