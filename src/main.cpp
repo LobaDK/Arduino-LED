@@ -77,13 +77,13 @@ void loop() {
   // Value read from the potentiometer
   int pot_value = analogRead(PENTIOMETER_PIN);
   
-  // 0 to 1023 range mapped to 0 to 50
-  int mapped_value = map(pot_value, 0, 1023, 0, 50);
-  Serial.println("Desired temperature: " + String(mapped_value) + "°C");
+  // A value between 0 and 50 for the desired temperature
+  int desired_temperature = map(pot_value, 0, 1023, 0, 50);
+  Serial.println("Desired temperature: " + String(desired_temperature) + "°C");
 
-  if (isTemperatureWithinRange(current_temperature, mapped_value, MAX_DEVIATION)) {
+  if (isTemperatureWithinRange(current_temperature, desired_temperature, MAX_DEVIATION)) {
     toggleLed(LOW, HIGH, LOW);
-  } else if (current_temperature < mapped_value) {
+  } else if (current_temperature < desired_temperature) {
     toggleLed(HIGH, LOW, LOW);
   } else {
     toggleLed(LOW, LOW, HIGH);
