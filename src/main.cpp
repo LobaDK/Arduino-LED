@@ -2,7 +2,8 @@
 #include <DHT11.h>
 #include <ezButton.h>
 
-const int TOGGLE_BUTTON_PIN = 2;
+const int TOGGLE_BUTTON_STATUS_LED_PIN = 2;
+const int TOGGLE_BUTTON_PIN = 3;
 const int DHT11_PIN = 4;
 const int PENTIOMETER_PIN = A0;
 const int RED_LED_PIN = 5;
@@ -53,8 +54,10 @@ void setup() {
   pinMode(RED_LED_PIN, OUTPUT);
   pinMode(GREEN_LED_PIN, OUTPUT);
   pinMode(BLUE_LED_PIN, OUTPUT);
+  pinMode(TOGGLE_BUTTON_STATUS_LED_PIN, OUTPUT);
   toggleButton.setDebounceTime(100);
   toggleLed(LOW, LOW, LOW);
+  digitalWrite(TOGGLE_BUTTON_STATUS_LED_PIN, HIGH);
 }
 
 void loop() {
@@ -67,7 +70,11 @@ void loop() {
 
   if (buttonState) {
     toggleLed(LOW, LOW, LOW);
+    digitalWrite(TOGGLE_BUTTON_STATUS_LED_PIN, HIGH);
     return;
+  }
+  else {
+    digitalWrite(TOGGLE_BUTTON_STATUS_LED_PIN, LOW);
   }
 
   // Temperature read from the DHT11 sensor
